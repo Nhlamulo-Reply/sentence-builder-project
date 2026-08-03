@@ -20,6 +20,8 @@ All notable changes to this project will be documented in this file.
  - Configure project folder structure
  - Configured Swagger for Api documentation
 
+ - Configure Db connection 
+
 
  ### Fix
 
