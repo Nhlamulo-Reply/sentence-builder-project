@@ -1,0 +1,17 @@
+# JetBrains IDE
+.idea/
+
+# Visual Studio
+.vs/
+
+# .NET
+**/bin/
+**/obj/
+
+# Angular
+**/node_modules/
+**/dist/
+
+# User files
+*.user
+*.suo
