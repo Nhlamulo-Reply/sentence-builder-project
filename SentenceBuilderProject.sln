@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Backend", "Backend\Backend.csproj", "{3B946860-0ACC-4DC4-8919-5CDAAEF3A40F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SentenceBuilder", "Backend\SentenceBuilder.API", "{3B946860-0ACC-4DC4-8919-5CDAAEF3A40F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
