@@ -21,7 +21,9 @@ All notable changes to this project will be documented in this file.
  - Configured Swagger for Api documentation
 
  - Configure Db connection 
-
+ -  Installed Entity Framework Core 9.0.8 packages.
+ -  Added Entity Framework Core tools for migrations. (dotnet add package Microsoft.EntityFrameworkCore.Design --version 9.0.8, dotnet add package Microsoft. EntityFrameworkCore.Tools --version 9.0.8)
+ - Configured DB Context to test database application
 
  ### Fix
 
