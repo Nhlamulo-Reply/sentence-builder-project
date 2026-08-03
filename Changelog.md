@@ -23,12 +23,15 @@ All notable changes to this project will be documented in this file.
  -  Added Entity Framework Core tools for migrations. (dotnet add package Microsoft.EntityFrameworkCore.Design --version 9.0.8, dotnet add package Microsoft. EntityFrameworkCore.Tools --version 9.0.8)
  - Configured DB Context to test database connection application
   - Added ERD design 
+- Added user , sentence,sentenceword, wordtype and word entities
 
  ### Fix
 
  
 
  ### Modify
+
+ - Modify dbcontext to register entities
 
 
  ### Remove
