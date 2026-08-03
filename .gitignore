@@ -15,3 +15,40 @@
 # User files
 *.user
 *.suo
+
+
+# Angular
+
+
+frontend/client/node_modules/
+frontend/client/dist/
+frontend/client/.angular/
+
+########################
+# ASP.NET
+
+
+backend/**/bin/
+backend/**/obj/
+backend/.vs/
+
+########################
+# Visual Studio
+
+
+.vs/
+*.user
+*.suo
+
+########################
+# Logs
+
+
+*.log
+
+########################
+# OS
+
+
+.DS_Store
+Thumbs.db
