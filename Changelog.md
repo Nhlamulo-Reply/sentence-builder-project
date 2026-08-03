@@ -23,6 +23,8 @@ All notable changes to this project will be documented in this file.
 
  ### Fix
 
+ 
+
  ### Modify
 
 
@@ -30,3 +32,4 @@ All notable changes to this project will be documented in this file.
 
  - Deleted default weatherforecast api
  - Removed OpenAPI to use swagger for Api documentation
+ - Delete default Weatherforecast Api
