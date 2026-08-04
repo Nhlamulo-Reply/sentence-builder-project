@@ -55,6 +55,12 @@ All notable changes to this project will be documented in this file.
 - Registered account service using dependency injection.
 - Exposed `/api/account/login` endpoint in Swagger.
 - Added Database seeders 
-## Changed
 
+
+## Changed
 - Organized authentication logic into dedicated `Controllers`, `Interfaces`, and `Services` folders.
+- CHanged project name and  solution to LexiCraft
+
+
+## Fixed
+- Fixed DatabaSeeder to all camelcases data and auto-increment ID's
