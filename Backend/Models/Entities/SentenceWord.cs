@@ -6,7 +6,7 @@ namespace Backend.Models.Entities
 {
     public class SentenceWord
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         public int SentenceId { get; set; }
 
         public int WordId { get; set; }

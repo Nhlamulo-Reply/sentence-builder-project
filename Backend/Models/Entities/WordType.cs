@@ -8,7 +8,7 @@ namespace Backend.Models.Entities
 
     public string Name { get; set; } = string.Empty;
 
-    // Navigation Property
-    public ICollection<Word> Words { get; set; } = new List<Word>();
+        // Navigation Property
+        public ICollection<Word> Words { get; set; } = [];
     }
 }

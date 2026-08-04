@@ -1,16 +1,13 @@
 
-
-using Microsoft.EntityFrameworkCore;
-using System;
 using Backend.Models.Entities;
-using Backend.Data;
+
 
 namespace Backend.Data
 {
     public class Sentence 
     {
-        public int id { get; set; }
-        public string? text { get; set; }
+        public int Id { get; set; }
+        public string? Text { get; set; }
 
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }

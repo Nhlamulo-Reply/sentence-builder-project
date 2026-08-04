@@ -3,7 +3,7 @@ using Backend.Interfaces.Account;
 using Backend.Services.Account;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
-using Backend.Data.Seeders;
+using Backend.Data.Seeder;
 
 var builder = WebApplication.CreateBuilder(args);
 

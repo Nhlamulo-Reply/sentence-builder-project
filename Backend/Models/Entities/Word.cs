@@ -14,6 +14,6 @@ public class Word
 
     public WordType? WordType { get; set; }
 
-    public ICollection<SentenceWord> SentenceWords { get; set; } = new List<SentenceWord>();
+    public ICollection<SentenceWord> SentenceWords { get; set; } = [];
 
 }

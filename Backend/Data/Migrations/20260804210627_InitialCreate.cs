@@ -45,16 +45,16 @@ namespace Backend.Data.Migrations
                 name: "Sentences",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    text = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Text = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Sentences", x => x.id);
+                    table.PrimaryKey("PK_Sentences", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Sentences_Users_UserId",
                         column: x => x.UserId,
@@ -87,7 +87,7 @@ namespace Backend.Data.Migrations
                 name: "SentenceWords",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     SentenceId = table.Column<int>(type: "int", nullable: false),
                     WordId = table.Column<int>(type: "int", nullable: false),
@@ -96,12 +96,12 @@ namespace Backend.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SentenceWords", x => x.id);
+                    table.PrimaryKey("PK_SentenceWords", x => x.Id);
                     table.ForeignKey(
                         name: "FK_SentenceWords_Sentences_SentenceId",
                         column: x => x.SentenceId,
                         principalTable: "Sentences",
-                        principalColumn: "id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_SentenceWords_Words_WordId",

@@ -1,38 +1,11 @@
 [
-  {
-    "id": 1,
-    "name": "Noun"
-  },
-  {
-    "id": 2,
-    "name": "Verb"
-  },
-  {
-    "id": 3,
-    "name": "Adjective"
-  },
-  {
-    "id": 4,
-    "name": "Adverb"
-  },
-  {
-    "id": 5,
-    "name": "Pronoun"
-  },
-  {
-    "id": 6,
-    "name": "Preposition"
-  },
-  {
-    "id": 7,
-    "name": "Conjunction"
-  },
-  {
-    "id": 8,
-    "name": "Determiner"
-  },
-  {
-    "id": 9,
-    "name": "Exclamation"
-  }
+  { "Name": "Noun" },
+  { "Name": "Verb" },
+  { "Name": "Adjective" },
+  { "Name": "Adverb" },
+  { "Name": "Pronoun" },
+  { "Name": "Preposition" },
+  { "Name": "Conjunction" },
+  { "Name": "Determiner" },
+  { "Name": "Exclamation" }
 ]
