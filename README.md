@@ -58,5 +58,7 @@ Update the `DefaultConnection` in `appsettings.json` to point to your database.
 > ```Run
  dotnet ef database update
 
+
+to run the application run dotnet watch run 
 The above command creates the database and applies all migrations.
 

@@ -54,7 +54,7 @@ All notable changes to this project will be documented in this file.
 - Created `LoginDto` for login requests.
 - Registered account service using dependency injection.
 - Exposed `/api/account/login` endpoint in Swagger.
-
+- Added Database seeders 
 ## Changed
 
 - Organized authentication logic into dedicated `Controllers`, `Interfaces`, and `Services` folders.

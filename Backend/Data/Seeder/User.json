@@ -1,0 +1,17 @@
+[
+  {
+    "username": "admin",
+    "email": "admin@lexicraft.com",
+    "passwordHash": "Password123!"
+  },
+  {
+    "username": "john",
+    "email": "john@lexicraft.com",
+    "passwordHash": "Password123!"
+  },
+  {
+    "username": "mary",
+    "email": "mary@lexicraft.com",
+    "passwordHash": "Password123!"
+  }
+]

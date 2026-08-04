@@ -1,0 +1,33 @@
+[
+  { "text": "Dog", "wordTypeId": 1 },
+  { "text": "Cat", "wordTypeId": 1 },
+  { "text": "Boy", "wordTypeId": 1 },
+  { "text": "Girl", "wordTypeId": 1 },
+
+  { "text": "Runs", "wordTypeId": 2 },
+  { "text": "Walks", "wordTypeId": 2 },
+  { "text": "Reads", "wordTypeId": 2 },
+  { "text": "Writes", "wordTypeId": 2 },
+
+  { "text": "Beautiful", "wordTypeId": 3 },
+  { "text": "Big", "wordTypeId": 3 },
+  { "text": "Small", "wordTypeId": 3 },
+
+  { "text": "Quickly", "wordTypeId": 4 },
+  { "text": "Slowly", "wordTypeId": 4 },
+
+  { "text": "He", "wordTypeId": 5 },
+  { "text": "She", "wordTypeId": 5 },
+
+  { "text": "On", "wordTypeId": 6 },
+  { "text": "Under", "wordTypeId": 6 },
+
+  { "text": "And", "wordTypeId": 7 },
+  { "text": "But", "wordTypeId": 7 },
+
+  { "text": "The", "wordTypeId": 8 },
+  { "text": "A", "wordTypeId": 8 },
+
+  { "text": "Wow!", "wordTypeId": 9 },
+  { "text": "Oops!", "wordTypeId": 9 }
+]

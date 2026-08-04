@@ -3,6 +3,7 @@ using Backend.Interfaces.Account;
 using Backend.Services.Account;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using Backend.Data.Seeders;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -56,4 +57,23 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+
+
+using (var scope = app.Services.CreateScope())
+{
+    try
+    {
+        var services = scope.ServiceProvider;
+        var context = services.GetRequiredService<ApplicationDbContext>();
+
+        // Apply any pending migrations
+        await context.Database.MigrateAsync();
+        await DatabaseSeeder.SeedAsync(context);
+    }
+    catch (Exception ex)
+    {
+        var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
+        logger.LogError(ex, "An error occurred while seeding the database.");
+    }
+}
 app.Run();
