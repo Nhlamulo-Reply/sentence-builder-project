@@ -35,7 +35,7 @@ backend/.vs/
 ########################
 # Visual Studio
 
-
+.vscode/
 .vs/
 *.user
 *.suo

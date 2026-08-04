@@ -1,12 +1,15 @@
+using Backend.Data;
+using Backend.Interfaces.Account;
+using Backend.Services.Account;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
-using Microsoft.EntityFrameworkCore; 
-using Backend.Data;   
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
+builder.Services.AddScoped<IAccountService, AccountService>();
 
 // builder.Services.AddOpenApi();
 

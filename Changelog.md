@@ -39,3 +39,22 @@ All notable changes to this project will be documented in this file.
  - Deleted default weatherforecast api
  - Removed OpenAPI to use swagger for Api documentation
  - Delete default Weatherforecast Api
+
+
+  ### [0.0.1] - 2026-08-04
+
+### Added 
+
+### Authentication
+
+- Created `BaseController` for all API controllers.
+- Added `AccountController` with a login endpoint.
+- Added `IAccountService` interface.
+- Implemented `AccountService`.
+- Created `LoginDto` for login requests.
+- Registered account service using dependency injection.
+- Exposed `/api/account/login` endpoint in Swagger.
+
+## Changed
+
+- Organized authentication logic into dedicated `Controllers`, `Interfaces`, and `Services` folders.
