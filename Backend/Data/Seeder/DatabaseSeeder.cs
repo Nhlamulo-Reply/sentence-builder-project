@@ -12,13 +12,12 @@ public static class DatabaseSeeder
     public static async Task SeedAsync(ApplicationDbContext context)
     {
         
-            Console.WriteLine("🌱 Starting database seeding...");
 
             await SeedWordTypes(context);
             await SeedWords(context);
             await SeedUsers(context);
 
-            Console.WriteLine("✅ Database seeding completed successfully!");
+            Console.WriteLine("Database seeding completed successfully!");
         
      
     }
