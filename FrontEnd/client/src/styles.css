@@ -1,1 +1,25 @@
-/* You can add global styles to this file, and also import other style files */
+/* Global styles */
+
+
+* {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+body {
+  background: #f4f6fa;
+}
+
+.card {
+  border-radius: 1.25rem;
+  border: none;
+  box-shadow: 0 8px 24px rgba(0,20,50,0.06);
+}
+
+.badge-lexi {
+  background: #eef3fc;
+  color: #1f3d6b;
+  font-weight: 500;
+  padding: 0.3rem 0.8rem;
+  border-radius: 40px;
+  font-size: 0.75rem;
+}
