@@ -14,6 +14,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<IWordTypeService, WordTypeService>();
+builder.Services.AddScoped<IWordService, WordService>();
 
 // builder.Services.AddOpenApi();
 
