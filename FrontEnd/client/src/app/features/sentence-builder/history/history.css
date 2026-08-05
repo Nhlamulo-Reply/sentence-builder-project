@@ -1,0 +1,61 @@
+.history-table {
+  th {
+    font-weight: 600;
+    color: #334e77;
+    border-bottom: 1px solid #e2e9f2;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+  td {
+    vertical-align: middle;
+    padding: 0.9rem 0.5rem;
+    border-bottom: 1px solid #edf2f9;
+  }
+  tr:last-child td { border-bottom: none; }
+}
+
+.action-link {
+  color: #1f3d6b;
+  font-weight: 500;
+  text-decoration: none;
+  font-size: 0.85rem;
+  cursor: pointer;
+
+  &:hover {
+    color: #0a1e3c;
+    text-decoration: underline;
+  }
+}
+
+.pagination-lexi {
+  .page-link {
+    border: none;
+    color: #1f3d6b;
+    background: transparent;
+    border-radius: 40px;
+    padding: 0.3rem 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+
+    &:hover { background: #e9f0fa; }
+  }
+  .page-item.active .page-link {
+    background: #1f3d6b;
+    color: white;
+    border-radius: 40px;
+  }
+  .page-item.disabled .page-link {
+    color: #b0c0d8;
+    cursor: not-allowed;
+  }
+}
+
+.badge-lexi {
+  background: #eef3fc;
+  color: #1f3d6b;
+  font-weight: 500;
+  padding: 0.3rem 0.8rem;
+  border-radius: 40px;
+  font-size: 0.75rem;
+}

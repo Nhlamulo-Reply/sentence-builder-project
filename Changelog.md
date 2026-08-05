@@ -56,7 +56,9 @@ All notable changes to this project will be documented in this file.
 - Exposed `/api/account/login` endpoint in Swagger.
 - Added Database seeders 
 - Added navbar,dashboard, history, word builder components
-
+- Create login form with email and password fields
+- Show demo credentials for quick testing
+- Add responsive layout for mobile devices"
 
 ## Changed
 - Organized authentication logic into dedicated `Controllers`, `Interfaces`, and `Services` folders.

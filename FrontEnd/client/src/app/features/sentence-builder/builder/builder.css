@@ -1,0 +1,61 @@
+.word-pill {
+  background: white;
+  border: 1px solid #dee3ed;
+  border-radius: 40px;
+  padding: 0.4rem 1.2rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #1e293b;
+  transition: 0.15s;
+  cursor: pointer;
+  display: inline-block;
+  margin: 0.2rem 0.25rem;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+
+  &:hover {
+    background: #f0f4ff;
+    border-color: #7c8db5;
+    transform: translateY(-1px);
+  }
+  &:active { background: #e6edfb; }
+}
+
+.sentence-token {
+  background: #eef6ff;
+  border-radius: 30px;
+  padding: 0.3rem 1rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #0b2b4a;
+  display: inline-block;
+  margin: 0.1rem 0.15rem;
+}
+
+.word-grid {
+  max-height: 170px;
+  overflow-y: auto;
+  padding-right: 4px;
+
+  &::-webkit-scrollbar { width: 4px; }
+  &::-webkit-scrollbar-thumb { background: #cdd8ea; border-radius: 20px; }
+}
+
+.clear-btn {
+  background: transparent;
+  border: none;
+  color: #8a9bb8;
+  font-weight: 500;
+  font-size: 0.9rem;
+
+  &:hover { color: #b91c1c; }
+}
+
+.btn-outline-secondary-custom {
+  border-color: #d0d9e8;
+  color: #2c3e5c;
+
+  &:hover {
+    background: #f0f4fe;
+    border-color: #a0b3d0;
+  }
+}
