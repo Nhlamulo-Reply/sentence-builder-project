@@ -41,7 +41,7 @@ All notable changes to this project will be documented in this file.
  - Delete default Weatherforecast Api
 
 
-  ### [0.0.1] - 2026-08-04
+  ### [0.0.2] - 2026-08-04
 
 ### Added 
 
@@ -55,6 +55,7 @@ All notable changes to this project will be documented in this file.
 - Registered account service using dependency injection.
 - Exposed `/api/account/login` endpoint in Swagger.
 - Added Database seeders 
+- Added navbar,dashboard, history, word builder components
 
 
 ## Changed
