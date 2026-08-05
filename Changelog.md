@@ -67,7 +67,7 @@ All notable changes to this project will be documented in this file.
 
 ## Fixed
 - Fixed DatabaSeeder to all camelcases data and auto-increment ID's
-
+- Add sentence creation API and integrate frontend save functionality
 
   ### [0.0.3] - 2026-08-05
 

@@ -2,7 +2,7 @@
 using Backend.Models.Entities;
 
 
-namespace Backend.Data
+namespace Backend.Models.Entities
 {
     public class Sentence 
     {

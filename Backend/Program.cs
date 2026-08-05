@@ -1,9 +1,13 @@
 using Backend.Data;
 using Backend.Data.Seeder;
 using Backend.Interfaces.Account;
+using Backend.Interfaces.Sentences;
+using Backend.Interfaces.word;
 using Backend.Interfaces.wordtype;
 using Backend.Service;
 using Backend.Services.Account;
+using Backend.Services.Sentence;
+using Backend.Services.WordService;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
@@ -15,6 +19,8 @@ builder.Services.AddControllers();
 builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<IWordTypeService, WordTypeService>();
 builder.Services.AddScoped<IWordService, WordService>();
+builder.Services.AddScoped<ISentenceService, SentenceService>();
+
 
 // builder.Services.AddOpenApi();
 
