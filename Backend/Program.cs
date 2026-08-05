@@ -1,9 +1,11 @@
 using Backend.Data;
+using Backend.Data.Seeder;
 using Backend.Interfaces.Account;
+using Backend.Interfaces.wordtype;
+using Backend.Service;
 using Backend.Services.Account;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
-using Backend.Data.Seeder;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddScoped<IAccountService, AccountService>();
+builder.Services.AddScoped<IWordTypeService, WordTypeService>();
 
 // builder.Services.AddOpenApi();
 
@@ -36,7 +39,23 @@ builder.Services.AddSwaggerGen(options =>
     });
 });
 
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend",
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:4200")
+                  .AllowAnyMethod()
+                  .AllowAnyHeader()
+                  .AllowCredentials();
+        });
+});
+
 var app = builder.Build();
+
+
+app.UseCors("AllowFrontend");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
