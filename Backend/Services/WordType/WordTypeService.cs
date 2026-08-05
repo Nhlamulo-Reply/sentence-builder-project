@@ -17,6 +17,6 @@ public class WordTypeService : IWordTypeService
 
     public async Task<List<WordType>> GetAllWordTypesAsync()
     {
-        return await _context.WordTypes.OrderBy(w => w.Id).ToListAsync();
+        return await _context.WordTypes.OrderBy(w => w.Name).ToListAsync();
     }
 }

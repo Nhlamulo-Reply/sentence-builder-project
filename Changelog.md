@@ -75,3 +75,4 @@ All notable changes to this project will be documented in this file.
   - Added word functionality and endpoint 
   - Added sentence builder and save sentence integration
   - Implement dynamic sentence builder with API integration
+  -  Implement word type API

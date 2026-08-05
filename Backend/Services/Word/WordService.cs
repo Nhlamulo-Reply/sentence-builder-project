@@ -1,10 +1,10 @@
 ﻿using Backend.Data;
-using Backend.Interfaces;
-using Backend.Interfaces.wordtype;
+using Backend.Interfaces.word;
 using Backend.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Backend.Services.Word
+
+namespace Backend.Services.WordService
 {
 
     public class WordService : IWordService
@@ -16,10 +16,11 @@ namespace Backend.Services.Word
             this._context = context;
         }
 
-        public Task<List<Word>> GetWordsByWordTypeId(int wordTypeId)
+        public async Task<List<Word>> GetWordsByWordTypeId(int wordTypeId)
         {
-           results = await _context.Words.Where(w => w.WordTypeId == wordTypeId).ToListAsync();
-           return results;
+            var results = await _context.Words.Where(w => w.WordTypeId == wordTypeId).OrderBy(w => w.Id).ToListAsync();
+
+            return results;
         }
     }
 }

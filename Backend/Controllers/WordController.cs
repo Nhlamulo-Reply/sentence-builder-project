@@ -1,13 +1,15 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Backend.Interfaces.Word;
+using Backend.Interfaces.word;
 
 namespace Backend.Controllers
 { 
     public class WordController : BaseController
     {
-        
-     public WordController(IWordService wordService)
+
+        private readonly IWordService _wordService;
+
+        public WordController(IWordService wordService)
      {
         _wordService = wordService;
      }

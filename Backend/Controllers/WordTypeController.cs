@@ -4,14 +4,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.Controllers
 {
-    public class WordTypeController : BaseController
+    public class WordTypeController(IWordTypeService wordTypeService) : BaseController
     {
-        private readonly IWordTypeService _wordTypeService;
-
-        public WordTypeController(IWordTypeService wordTypeService)
-        {
-            _wordTypeService = wordTypeService;
-        }
+       
+        private readonly IWordTypeService _wordTypeService = wordTypeService;
 
         [HttpGet]
         public async Task<IActionResult> GetAllWordTypes()
