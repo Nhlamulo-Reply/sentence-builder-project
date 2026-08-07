@@ -2,13 +2,22 @@
 using Backend.DTOs.Sentence;
 using Backend.Interfaces.Sentences;
 using Backend.Models.Entities;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Backend.Models.Entities;
 
 namespace Backend.Services.Sentence
 {
     public class SentenceService(ApplicationDbContext context) : ISentenceService
     {
         private readonly ApplicationDbContext _context = context;
+
+
+        public async Task<List<Backend.Models.Entities.Sentence>> GetAllSentences()
+        {
+          var results =  await _context.Sentences.OrderByDescending(x => x.CreatedAt).ToListAsync();
+          return results;
+        }
 
         public async Task<Backend.Models.Entities.Sentence> SaveSentence(SaveSentenceDto dto)
         {
@@ -39,5 +48,35 @@ namespace Backend.Services.Sentence
 
             return sentence;
         }
+
+
+
+
+        public async Task<Backend.Models.Entities.Sentence?> GetSentenceById(int id)
+        {
+            return await _context.Sentences
+                .Include(x => x.SentenceWords)
+                .ThenInclude(x => x.Word)
+                .FirstOrDefaultAsync(x => x.Id == id);
+        }
+
+
+        public async Task<Backend.Models.Entities.Sentence?> UpdateSentence(int id, SaveSentenceDto dto)
+        {
+            var sentence = await _context.Sentences.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (sentence == null)
+                return null;
+
+            var words = await _context.Words.Where(x => dto.WordIds.Contains(x.Id)).ToListAsync();
+
+            sentence.Text = string.Join(" ", words.Select(x => x.Text));
+            sentence.UpdatedAt = DateTime.UtcNow;
+
+            await _context.SaveChangesAsync();
+
+            return sentence;
+        }
+
     }
 }
