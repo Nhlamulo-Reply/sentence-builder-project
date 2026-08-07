@@ -1,28 +1,61 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
   <div class="container">
-    <a class="navbar-brand fw-bold" href="#" style="color: #0a1e3c;">
+
+    <a class="navbar-brand fw-bold" routerLink="/dashboard" style="color: #0a1e3c;">
       <i class="bi bi-pencil-square fs-4" style="color: #1f3d6b;"></i>
       LexiCraft
     </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav">
       <span class="navbar-toggler-icon"></span>
     </button>
+
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
-          <a class="nav-link active" routerLink="/dashboard">Dashboard</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/builder">Builder</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/history">History</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">
-            <i class="bi bi-person-circle"></i> Profile
-          </a>
-        </li>
+
+        @if (isLoggedIn) {
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/dashboard" routerLinkActive="active">
+              Dashboard
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/builder" routerLinkActive="active">
+              Builder
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/history" routerLinkActive="active">
+              History
+            </a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
+              <i class="bi bi-person-circle"></i> {{ username }}
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><a class="dropdown-item" href="#"><i class="bi bi-person"></i> Profile</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li>
+                <a class="dropdown-item text-danger" (click)="logout()" style="cursor: pointer;">
+                  <i class="bi bi-box-arrow-right"></i> Logout
+                </a>
+              </li>
+            </ul>
+          </li>
+        }
+        @if (!isLoggedIn) {
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/login" routerLinkActive="active">
+              <i class="bi bi-box-arrow-in-right"></i> Login
+            </a>
+          </li>
+        }
+
       </ul>
     </div>
   </div>
