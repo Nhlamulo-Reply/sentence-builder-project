@@ -2,7 +2,7 @@
 using Backend.Models.Entities;
 
 
-namespace Backend.Data
+namespace Backend.Models.Entities
 {
     public class Sentence 
     {
@@ -15,6 +15,8 @@ namespace Backend.Data
         public int UserId { get; set; }
 
         public User? User { get; set; }
+
+        public ICollection<SentenceWord> SentenceWords { get; set; } = new List<SentenceWord>();
 
     }
 

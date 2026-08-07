@@ -1,64 +1,177 @@
-## Install Entity Framework Core
+# LexiCraft
 
-Install the required Entity Framework Core packages for SQL Server by running the following commands:
+LexiCraft is a sentence builder application built using ASP.NET Core 9 and Angular 20.
+LexiCraft is a combination of two words:
 
-```Run
-dotnet add package Microsoft.EntityFrameworkCore.SqlServer --version 9.0.8
+Lexi –  which means word, speech, or vocabulary.
+Craft – means to create, build, design, or skillfully make something.
 
-# Required for creating and managing migrations
-dotnet add package Microsoft.EntityFrameworkCore.Design --version 9.0.8
+## Technologies Used
 
-# Entity Framework CLI tools
-dotnet add package Microsoft.EntityFrameworkCore.Tools --version 9.0.8
+### Backend
 
-# Restore NuGet packages
+- ASP.NET Core 9
+- Entity Framework Core 9.0.8
+- SQL Server LocalDB
+
+### Frontend
+
+- Angular 20
+- Angular Material
+- Bootstrap 5
+
+---
+
+## Software Required
+
+Before running the project make sure the following software is installed:
+
+- Visual Studio 2022
+- .NET 9 SDK
+- Node.js 22.x LTS or later
+- Git
+- SQL Server LocalDB
+- SQL Server Management Studio (SSMS) (recommended)
+
+> A global Angular CLI installation is not required. The frontend uses the locally installed `@angular/cli` dependency in `FrontEnd/client`.
+
+---
+
+## Clone the Repository
+
+```bash
+git clone https://github.com/Nhlamulo-Reply/sentence-builder-project.git
+
+cd sentence-builder-project
+```
+
+---
+
+## Install Backend Packages
+
+Navigate to the Backend folder.
+
+```bash
+cd Backend
+```
+
+Install Entity Framework packages.
+
+```bash
+
 dotnet restore
 ```
 
-## Verify SQL Server LocalDB
+---
 
-Check that SQL Server LocalDB is installed:
+## SQL Server
 
-```Run
+Check that LocalDB is installed.
+
+```bash
 sqllocaldb info
 ```
 
-You should see an instance similar to:
-
-```text
-MSSQLLocalDB
-```
-
-Start the LocalDB instance:
+Start LocalDB.
 
 ```bash
 sqllocaldb start MSSQLLocalDB
 ```
 
-Alternatively, replace `MSSQLLocalDB` with the name of your LocalDB instance if it is different.
+Open SQL Server Management Studio and connect using:
 
-To verify that it is running, execute:
+```
+Server Name:
+(localdb)\MSSQLLocalDB or Use the one shown on your laptop when you ran sqllocaldb info
 
-```bash
-sqllocaldb info MSSQLLocalDB
+Authentication:
+Windows Authentication
 ```
 
-The output should indicate that the instance is in the **Running** state.
+---
 
-## Configure the Connection String
+## Connection String
 
-Update the `DefaultConnection` in `appsettings.json` to point to your database.
+Update your `appsettings.json`.
 
 ```json
 "ConnectionStrings": {
-  "DefaultConnection": "Server=(localdb)\\MSSQLLocalDB;Database=SentenceBuilderDB;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True"
+  "DefaultConnection": "Server=(localdb)\\MSSQLLocalDB;Database=WordBuilderDB;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True"
 }
 ```
 
-> ```Run
- dotnet ef database update
+---
 
+## Create the Database
 
-to run the application run dotnet watch run 
-The above command creates the database and applies all migrations.
+```bash
+dotnet ef database update
+```
+
+---
+
+## Database name
+
+```bash
+WordBuilderDB
+```
+
+---
+
+## Run the Backend
+
+```bash
+cd Backend
+
+dotnet watch run
+```
+
+To open Swagger go to :
+
+```
+https://localhost:5010/index.html
+```
+
+---
+
+## Run the Frontend
+
+Navigate to the Angular project and install dependencies:
+
+```bash
+cd FrontEnd/client
+npm install
+```
+
+Start the app using the local CLI wrapper:
+
+```bash
+npm start
+```
+
+If `npm start` does not work, run:
+
+```bash
+npm exec ng serve
+```
+
+Open:
+
+```
+http://localhost:4200
+```
+
+---
+
+## Login
+
+```
+Email:
+john@lexicraft.com
+
+Password:
+Password123!
+```
+
+---
 

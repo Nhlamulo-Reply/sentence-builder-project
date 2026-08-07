@@ -1,36 +1,101 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
+import { WordTypeService } from '../../../core/services/word-type-service';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import {SentenceService} from '../../../core/services/sentence-service';
+interface WordType {
+  id: number;
+  name: string;
+}
+
+interface Word {
+  id: number;
+  text: string;
+  wordTypeId: number;
+}
 
 @Component({
   selector: 'app-builder',
-  imports: [],
+  imports: [CommonModule, FormsModule],
   templateUrl: './builder.html',
   styleUrl: './builder.css',
   standalone: true
 })
-export class Builder {
+export class Builder implements OnInit
+{
+  private wordTypeService = inject(WordTypeService);
+  private  sentenceService = inject(SentenceService)
 
-  availableWords: string[] = [
-    'Dog', 'Cat', 'Boy', 'Girl', 'Book', 'House', 'Tree', 'Car',
-    'Teacher', 'Student', 'City', 'Phone', 'Friend', 'Game', 'Music', 'Pen'
-  ];
+  selectedWordType = '';
+  wordTypes: WordType[] = [];
+  availableWords: Word[] = [];
+  currentSentence: Word[] = [];
 
-  currentSentence: string[] = ['The', 'boy', 'reads', 'a', 'book', 'quickly'];
+  ngOnInit(): void
+  {
+    this.loadWordTypes();
+  }
 
-  addWord(word: string): void {
+  loadWordTypes(): void
+  {
+    this.wordTypeService.getAllWordsType().subscribe({
+      next: (res: any) => {
+        this.wordTypes = res;
+      },
+      error: (err) => console.log(err)
+    });
+  }
+
+  loadWordsByWordTypeId(): void
+  {
+    if (!this.selectedWordType)
+    {
+      this.availableWords = [];
+      return;
+    }
+
+    const wordSelected = Number(this.selectedWordType);
+    this.wordTypeService.getAllWordByIdType(wordSelected).subscribe({
+      next: (res: any) =>
+      {
+        this.availableWords = res;
+      },
+      error: (err) => console.log(err)
+    });
+  }
+
+  addWord(word: any): void
+  {
     this.currentSentence.push(word);
   }
 
-  clearSentence(): void {
+  clearSentence(): void
+  {
     this.currentSentence = [];
   }
 
-  resetSentence(): void {
-    this.currentSentence = ['The', 'boy', 'reads', 'a', 'book', 'quickly'];
+  resetSentence(): void
+  {
+    this.currentSentence = [];
   }
 
   saveSentence(): void {
-    // Logic to save sentence
-    console.log('Saving sentence:', this.currentSentence.join(' '));
-    alert('Sentence saved!');
+
+    const sentence = {
+      userId: 1,
+      wordIds: this.currentSentence.map(word => word.id)
+    };
+
+    this.sentenceService.saveCreatedSentence(sentence).subscribe({
+      next: (res) => {
+        console.log(res);
+        alert('Sentence saved successfully!');
+        this.currentSentence = [];
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
+
   }
 }

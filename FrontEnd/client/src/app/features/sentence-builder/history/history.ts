@@ -1,55 +1,87 @@
-import { Component } from '@angular/core';
+import {AfterViewInit, Component, inject, OnInit, ViewChild} from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
+import { MatButtonModule } from '@angular/material/button';
+import { MatTableDataSource } from '@angular/material/table';
+import { SentenceService } from '../../../core/services/sentence-service';
+import { MatDialog } from '@angular/material/dialog';
+import { EditSentence } from '../edit-sentence/edit-sentence';
 
-
-interface Sentence {
+interface Sentence
+{
+  id: number;
   text: string;
-  createdDate: string;
-  createdTime: string;
+  createdAt: string;
+  userId: number;
 }
 
 @Component({
   selector: 'app-history',
-  imports: [],
+  standalone: true,
   templateUrl: './history.html',
   styleUrl: './history.css',
-  standalone: true
+  imports: [
+    CommonModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatButtonModule
+  ]
 })
-export class History {
 
-  Math = Math;
-  currentPage = 1;
-  itemsPerPage = 3;
+export class History implements OnInit, AfterViewInit
+{
 
-  sentences: Sentence[] = [
-    { text: 'The boy reads a book quickly.', createdDate: 'May 26, 2025', createdTime: '10:30 AM' },
-    { text: 'She walks under the tree.', createdDate: 'May 26, 2025', createdTime: '10:28 AM' },
-    { text: 'The cat is small and cute.', createdDate: 'May 26, 2025', createdTime: '10:25 AM' },
-    { text: 'We play football in the park.', createdDate: 'May 26, 2025', createdTime: '10:20 AM' },
-    { text: 'I love learning new words.', createdDate: 'May 25, 2025', createdTime: '3:15 PM' },
-    { text: 'The beautiful sunset amazed us.', createdDate: 'May 25, 2025', createdTime: '2:00 PM' }
-  ];
+  private sentenceService = inject(SentenceService);
+  private dialog = inject(MatDialog);
 
-  get totalPages(): number {
-    return Math.ceil(this.sentences.length / this.itemsPerPage);
+  displayedColumns = ['id', 'text', 'createdAt', 'actions'];
+
+  dataSource = new MatTableDataSource<Sentence>();
+
+  @ViewChild(MatPaginator)
+  paginator!: MatPaginator;
+
+  ngOnInit(): void
+  {
+    this.loadSentences();
   }
 
-  getPageNumbers(): number[] {
-    const pages: number[] = [];
-    for (let i = 1; i <= this.totalPages; i++) {
-      pages.push(i);
-    }
-    return pages;
+  ngAfterViewInit(): void
+  {
+    this.dataSource.paginator = this.paginator;
   }
 
-  changePage(page: number): void {
-    if (page >= 1 && page <= this.totalPages) {
-      this.currentPage = page;
-    }
+  loadSentences(): void
+  {
+    this.sentenceService.getAllSentences().subscribe({
+      next: res => {
+        this.dataSource.data = res;
+      },
+      error: err => console.log(err)
+    });
   }
 
-  viewSentence(sentence: Sentence, event: Event): void {
-    event.preventDefault();
-    alert(`Viewing: ${sentence.text}`);
+  edit(sentence: Sentence): void
+  {
+    const dialogRef = this.dialog.open(EditSentence, {
+      width: '900px',
+      data: sentence.id
+
+    });
+    dialogRef.afterClosed().subscribe(result =>
+    {
+      if(result)
+      {
+        this.loadSentences();
+      }
+
+    });
+
   }
 
+  delete(sentence: Sentence): void
+  {
+    console.log(sentence);
+  }
 }

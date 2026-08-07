@@ -8,11 +8,12 @@ import {History} from './features/sentence-builder/history/history';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Login,Navbar],
+  imports: [RouterOutlet,Navbar],
   templateUrl: './app.html',
   standalone: true,
   styleUrl: './app.css'
 })
-export class App {
-  protected readonly title = signal('LexiCraft');
+export class App
+{
+  title = 'LexiCraft';
 }

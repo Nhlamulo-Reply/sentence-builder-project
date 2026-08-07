@@ -1,83 +1,60 @@
 <div class="container mt-4">
-  <div class="row">
+
+  <div class="row mb-4">
     <div class="col-12">
-      <h2 class="mb-4" style="color: #1f3d6b;">Dashboard</h2>
-    </div>
-  </div>
-
-  <!-- Stats Cards -->
-  <div class="row g-4 mb-4">
-    <div class="col-md-3">
-      <div class="card h-100 shadow-sm">
+      <div class="card bg-primary text-white shadow-sm">
         <div class="card-body">
-          <h6 class="text-muted">Total Sentences</h6>
-          <h2 class="fw-bold" style="color: #1f3d6b;">24</h2>
-          <small class="text-success"><i class="bi bi-arrow-up"></i> 12% this week</small>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-3">
-      <div class="card h-100 shadow-sm">
-        <div class="card-body">
-          <h6 class="text-muted">Words Learned</h6>
-          <h2 class="fw-bold" style="color: #1f3d6b;">156</h2>
-          <small class="text-success"><i class="bi bi-arrow-up"></i> 8% this week</small>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-3">
-      <div class="card h-100 shadow-sm">
-        <div class="card-body">
-          <h6 class="text-muted">Practice Sessions</h6>
-          <h2 class="fw-bold" style="color: #1f3d6b;">42</h2>
-          <small class="text-danger"><i class="bi bi-arrow-down"></i> 3% this week</small>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-3">
-      <div class="card h-100 shadow-sm">
-        <div class="card-body">
-          <h6 class="text-muted">Current Streak</h6>
-          <h2 class="fw-bold" style="color: #1f3d6b;">7 <small class="fs-6">days</small></h2>
-          <small class="text-success"><i class="bi bi-fire"></i> Keep going!</small>
+          <h2 class="mb-1">Welcome back, {{ username }}! </h2>
+          <p class="mb-0">Start building your sentences using the navigation below.</p>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Recent Activity -->
+
   <div class="row">
     <div class="col-12">
       <div class="card shadow-sm">
         <div class="card-header bg-white">
-          <h5 class="mb-0" style="color: #1f3d6b;">Recent Activity</h5>
+          <h5 class="mb-0" style="color: #1f3d6b;">
+            <i class="bi bi-compass"></i> Quick Navigation
+          </h5>
         </div>
         <div class="card-body">
-          <div class="list-group list-group-flush">
-            <div class="list-group-item d-flex justify-content-between align-items-center">
-              <div>
-                <i class="bi bi-plus-circle text-success me-2"></i>
-                Created "The beautiful sunset" sentence
+          <div class="row g-3">
+
+            <div class="col-md-6">
+              <div class="card h-100 text-center border-0 shadow-sm">
+                <div class="card-body">
+                  <i class="bi bi-pencil-square fs-1 text-primary"></i>
+                  <h5 class="mt-2">Sentence Builder</h5>
+                  <p class="text-muted small">Build sentences by selecting words</p>
+                  <a routerLink="/builder" class="btn btn-primary btn-sm">
+                    Go to Builder
+                  </a>
+                </div>
               </div>
-              <small class="text-muted">2 hours ago</small>
             </div>
-            <div class="list-group-item d-flex justify-content-between align-items-center">
-              <div>
-                <i class="bi bi-pencil text-primary me-2"></i>
-                Edited "I love learning" sentence
+
+            <!-- History -->
+            <div class="col-md-6">
+              <div class="card h-100 text-center border-0 shadow-sm">
+                <div class="card-body">
+                  <i class="bi bi-clock-history fs-1 text-success"></i>
+                  <h5 class="mt-2">Sentence History</h5>
+                  <p class="text-muted small">View all your saved sentences</p>
+                  <a routerLink="/history" class="btn btn-success btn-sm">
+                    View History
+                  </a>
+                </div>
               </div>
-              <small class="text-muted">5 hours ago</small>
             </div>
-            <div class="list-group-item d-flex justify-content-between align-items-center">
-              <div>
-                <i class="bi bi-trash text-danger me-2"></i>
-                Deleted old sentence
-              </div>
-              <small class="text-muted">1 day ago</small>
-            </div>
+
+
           </div>
         </div>
       </div>
     </div>
   </div>
+
 </div>
