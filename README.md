@@ -1,53 +1,98 @@
-## Install Entity Framework Core
+# LexiCraft
 
-Install the required Entity Framework Core packages for SQL Server by running the following commands:
+LexiCraft is a sentence builder application built using ASP.NET Core 9 and Angular 20.
 
-```Run
+## Technologies Used
+
+### Backend
+
+- ASP.NET Core 9
+- Entity Framework Core 9.0.8
+- SQL Server LocalDB
+
+### Frontend
+
+- Angular 20
+- Angular Material
+- Bootstrap 5
+
+---
+
+## Software Required
+
+Before running the project make sure the following software is installed:
+
+- Visual Studio 2022
+- .NET 9 SDK
+- Node.js (22.x LTS recommended)
+- Angular CLI 20
+- SQL Server LocalDB
+- SQL Server Management Studio (SSMS) (Recommended)
+- Git
+
+---
+
+## Clone the Repository
+
+```bash
+git clone <repository-url>
+
+cd SentenceBuilderProject
+```
+
+---
+
+## Install Backend Packages
+
+Navigate to the Backend folder.
+
+```bash
+cd Backend
+```
+
+Install Entity Framework packages.
+
+```bash
 dotnet add package Microsoft.EntityFrameworkCore.SqlServer --version 9.0.8
 
-# Required for creating and managing migrations
 dotnet add package Microsoft.EntityFrameworkCore.Design --version 9.0.8
 
-# Entity Framework CLI tools
 dotnet add package Microsoft.EntityFrameworkCore.Tools --version 9.0.8
 
-# Restore NuGet packages
 dotnet restore
 ```
 
-## Verify SQL Server LocalDB
+---
 
-Check that SQL Server LocalDB is installed:
+## SQL Server
 
-```Run
+Check that LocalDB is installed.
+
+```bash
 sqllocaldb info
 ```
 
-You should see an instance similar to:
-
-```text
-MSSQLLocalDB
-```
-
-Start the LocalDB instance:
+Start LocalDB.
 
 ```bash
 sqllocaldb start MSSQLLocalDB
 ```
 
-Alternatively, replace `MSSQLLocalDB` with the name of your LocalDB instance if it is different.
+Open SQL Server Management Studio and connect using:
 
-To verify that it is running, execute:
+```
+Server Name:
+(localdb)\MSSQLLocalDB or Use the one shown on your laptop when you ran sqllocaldb info
 
-```bash
-sqllocaldb info MSSQLLocalDB
+Authentication:
+Windows Authentication
 ```
 
-The output should indicate that the instance is in the **Running** state.
+---
 
-## Configure the Connection String
+## Connection String
 
-Update the `DefaultConnection` in `appsettings.json` to point to your database.
+Update your `appsettings.json`.
 
 ```json
 "ConnectionStrings": {
@@ -55,10 +100,69 @@ Update the `DefaultConnection` in `appsettings.json` to point to your database.
 }
 ```
 
-> ```Run
- dotnet ef database update
+---
 
+## Create the Database
 
-to run the application run dotnet watch run 
-The above command creates the database and applies all migrations.
+```bash
+dotnet ef database update
+```
 
+---
+
+## Run the Backend
+
+```bash
+cd Backend
+
+dotnet watch run
+```
+
+Swagger
+
+```
+https://localhost:5010/index.html
+```
+
+---
+
+## Run the Frontend
+
+Navigate to the Angular project.
+
+```bash
+cd FrontEnd/client
+
+npm install
+
+ng serve
+```
+
+Open
+
+```
+http://localhost:4200
+```
+
+---
+
+## Login
+
+```
+Email:
+john@lexicraft.com
+
+Password:
+Password123!
+```
+
+---
+
+## Features
+
+- Login
+- Build sentences
+- Save sentences
+- View sentence history
+- Edit existing sentences
+- Swagger documentation
