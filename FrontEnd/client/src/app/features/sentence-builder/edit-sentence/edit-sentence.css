@@ -1,0 +1,244 @@
+.dialog-container {
+  padding: 1.5rem;
+  max-width: 900px;
+}
+
+/* Header */
+.dialog-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e9eff6;
+}
+
+.dialog-header h2 {
+  margin: 0;
+  font-size: 1.3rem;
+  color: #1f3d6b;
+}
+
+.dialog-header h2 i {
+  margin-right: 0.5rem;
+}
+
+.dialog-header .btn-close {
+  width: 30px;
+  height: 30px;
+}
+
+/* Error */
+.alert {
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+}
+
+.alert i {
+  margin-right: 0.5rem;
+}
+
+/* Sentence Section */
+.sentence-section {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: #f8faff;
+  border-radius: 12px;
+  border: 1px solid #e9eff6;
+}
+
+.sentence-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.sentence-header .form-label {
+  margin: 0;
+}
+
+.sentence-words-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  min-height: 50px;
+  padding: 0.75rem;
+  background: white;
+  border-radius: 8px;
+  border: 1px dashed #d0d9e8;
+  transition: border-color 0.2s;
+}
+
+.sentence-words-container:hover {
+  border-color: #1f3d6b;
+}
+
+/* Word Tokens */
+.word-token {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: #e3f2fd;
+  color: #0d47a1;
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  user-select: none;
+}
+
+.word-token:hover {
+  background: #bbdefb;
+  transform: translateY(-1px);
+}
+
+.word-token .remove-icon {
+  font-size: 1rem;
+  color: #c62828;
+  transition: transform 0.2s;
+}
+
+.word-token:hover .remove-icon {
+  transform: scale(1.2);
+}
+
+/* Sentence Preview */
+.sentence-preview {
+  margin-top: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  background: white;
+  border-radius: 6px;
+  border-left: 3px solid #1f3d6b;
+  font-size: 0.95rem;
+}
+
+/* Add Words Section */
+.add-words-section {
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 10px;
+  border: 1px solid #e9eff6;
+  margin-bottom: 1.5rem;
+}
+
+.add-words-section .form-label {
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+.available-words {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  min-height: 36px;
+  align-items: center;
+  padding: 0.25rem 0;
+}
+
+.word-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: white;
+  border: 1px solid #dee3ed;
+  border-radius: 20px;
+  padding: 0.25rem 0.8rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #1e293b;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.word-pill:hover {
+  background: #e3f2fd;
+  border-color: #1f3d6b;
+  transform: translateY(-1px);
+}
+
+.word-pill .add-icon {
+  font-size: 0.8rem;
+  color: #1f3d6b;
+}
+
+/* Footer */
+.dialog-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e9eff6;
+}
+
+.dialog-footer .btn {
+  border-radius: 25px;
+  padding: 0.4rem 1.5rem;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s;
+}
+
+.dialog-footer .btn:hover {
+  transform: translateY(-2px);
+}
+
+.dialog-footer .btn-secondary {
+  background: #f0f4ff;
+  color: #1f3d6b;
+  border: 1px solid #d0d9e8;
+}
+
+.dialog-footer .btn-secondary:hover {
+  background: #e5ebf8;
+}
+
+.dialog-footer .btn-primary {
+  background: #1f3d6b;
+  border: none;
+  color: white;
+}
+
+.dialog-footer .btn-primary:hover {
+  background: #0a1e3c;
+}
+
+.dialog-footer .btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .dialog-container {
+    padding: 1rem;
+  }
+
+  .dialog-footer {
+    flex-direction: column;
+  }
+
+  .dialog-footer .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .row.g-2 {
+    flex-direction: column;
+  }
+
+  .row.g-2 > [class*="col-"] {
+    width: 100%;
+  }
+
+  .sentence-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+}
