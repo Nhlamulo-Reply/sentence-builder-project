@@ -16,6 +16,8 @@ namespace Backend.Models.Entities
 
         public User? User { get; set; }
 
+        public ICollection<SentenceWord> SentenceWords { get; set; } = new List<SentenceWord>();
+
     }
 
    
