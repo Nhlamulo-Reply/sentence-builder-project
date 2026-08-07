@@ -1,6 +1,10 @@
 # LexiCraft
 
 LexiCraft is a sentence builder application built using ASP.NET Core 9 and Angular 20.
+LexiCraft is a combination of two words:
+
+Lexi –  which means word, speech, or vocabulary.
+Craft – means to create, build, design, or skillfully make something.
 
 ## Technologies Used
 
@@ -35,7 +39,7 @@ Before running the project make sure the following software is installed:
 ## Clone the Repository
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/Nhlamulo-Reply/sentence-builder-project.git
 
 cd SentenceBuilderProject
 ```
@@ -96,7 +100,7 @@ Update your `appsettings.json`.
 
 ```json
 "ConnectionStrings": {
-  "DefaultConnection": "Server=(localdb)\\MSSQLLocalDB;Database=SentenceBuilderDB;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True"
+  "DefaultConnection": "Server=(localdb)\\MSSQLLocalDB;Database=WordBuilderDB;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True"
 }
 ```
 
@@ -110,6 +114,14 @@ dotnet ef database update
 
 ---
 
+## Database name
+
+```bash
+WordBuilderDB
+```
+
+---
+
 ## Run the Backend
 
 ```bash
@@ -118,7 +130,7 @@ cd Backend
 dotnet watch run
 ```
 
-Swagger
+To open Swagger go to :
 
 ```
 https://localhost:5010/index.html
@@ -158,11 +170,3 @@ Password123!
 
 ---
 
-## Features
-
-- Login
-- Build sentences
-- Save sentences
-- View sentence history
-- Edit existing sentences
-- Swagger documentation
