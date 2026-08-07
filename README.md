@@ -28,11 +28,12 @@ Before running the project make sure the following software is installed:
 
 - Visual Studio 2022
 - .NET 9 SDK
-- Node.js (22.x LTS recommended)
-- Angular CLI 20
-- SQL Server LocalDB
-- SQL Server Management Studio (SSMS) (Recommended)
+- Node.js 22.x LTS or later
 - Git
+- SQL Server LocalDB
+- SQL Server Management Studio (SSMS) (recommended)
+
+> A global Angular CLI installation is not required. The frontend uses the locally installed `@angular/cli` dependency in `FrontEnd/client`.
 
 ---
 
@@ -41,7 +42,7 @@ Before running the project make sure the following software is installed:
 ```bash
 git clone https://github.com/Nhlamulo-Reply/sentence-builder-project.git
 
-cd SentenceBuilderProject
+cd sentence-builder-project
 ```
 
 ---
@@ -57,11 +58,6 @@ cd Backend
 Install Entity Framework packages.
 
 ```bash
-dotnet add package Microsoft.EntityFrameworkCore.SqlServer --version 9.0.8
-
-dotnet add package Microsoft.EntityFrameworkCore.Design --version 9.0.8
-
-dotnet add package Microsoft.EntityFrameworkCore.Tools --version 9.0.8
 
 dotnet restore
 ```
@@ -140,17 +136,26 @@ https://localhost:5010/index.html
 
 ## Run the Frontend
 
-Navigate to the Angular project.
+Navigate to the Angular project and install dependencies:
 
 ```bash
 cd FrontEnd/client
-
 npm install
-
-ng serve
 ```
 
-Open
+Start the app using the local CLI wrapper:
+
+```bash
+npm start
+```
+
+If `npm start` does not work, run:
+
+```bash
+npm exec ng serve
+```
+
+Open:
 
 ```
 http://localhost:4200
