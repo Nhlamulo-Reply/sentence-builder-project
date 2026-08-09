@@ -4,7 +4,6 @@ using Backend.Interfaces.Sentences;
 using Backend.Models.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Backend.Models.Entities;
 
 namespace Backend.Services.Sentence
 {
@@ -12,11 +11,21 @@ namespace Backend.Services.Sentence
     {
         private readonly ApplicationDbContext _context = context;
 
-
         public async Task<List<Backend.Models.Entities.Sentence>> GetAllSentences()
         {
-          var results =  await _context.Sentences.OrderByDescending(x => x.CreatedAt).ToListAsync();
-          return results;
+            var result = await _context.Sentences
+                .OrderByDescending(x => x.CreatedAt)
+                .Select(x => new Backend.Models.Entities.Sentence
+                {
+                    Id = x.Id,
+                    Text = x.Text,
+                    CreatedAt = x.CreatedAt,
+                    UpdatedAt = x.UpdatedAt,
+                    UserId = x.UserId
+                })
+                .ToListAsync();
+
+            return result;
         }
 
         public async Task<Backend.Models.Entities.Sentence> SaveSentence(SaveSentenceDto dto)

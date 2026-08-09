@@ -28,9 +28,15 @@ namespace Backend.Controllers
         public async Task<IActionResult> SaveSentence([FromBody] SaveSentenceDto dto)
         {
             var result = await _sentenceService.SaveSentence(dto);
-            return Ok(result);
-        }
 
+            return Ok(new
+            {
+                result.Id,
+                result.Text,
+                result.CreatedAt,
+                result.UserId
+            });
+        }
 
 
         [HttpGet("{id}")]
@@ -49,15 +55,16 @@ namespace Backend.Controllers
                 sentence.UserId,
                 Words = sentence.SentenceWords.Select(x => new
                 {
-                    x.Word.Id,
+                    x.Word!.Id,
                     x.Word.Text,
                     x.Word.WordTypeId
                 })
             });
         }
 
+
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateSentence(int id, SaveSentenceDto dto)
+        public async Task<IActionResult> UpdateSentence(int id,[FromBody] SaveSentenceDto dto)
         {
             var sentence = await _sentenceService.UpdateSentence(id, dto);
 
@@ -66,7 +73,12 @@ namespace Backend.Controllers
                 return NotFound();
             }
 
-            return Ok(sentence);
+            return Ok(new
+            {
+                sentence.Id,
+                sentence.Text,
+                sentence.UpdatedAt
+            });
         }
 
 
