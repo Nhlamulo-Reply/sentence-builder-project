@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import {Component, inject, OnInit, signal} from '@angular/core';
 import { WordTypeService } from '../../../core/services/word-type-service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -26,10 +26,10 @@ export class Builder implements OnInit
   private wordTypeService = inject(WordTypeService);
   private  sentenceService = inject(SentenceService)
 
-  selectedWordType = '';
-  wordTypes: WordType[] = [];
-  availableWords: Word[] = [];
-  currentSentence: Word[] = [];
+  selectedWordType = signal<string>('');
+  wordTypes = signal<WordType[]>([]);
+  availableWords = signal<Word[]>([]);
+  currentSentence = signal<Word[]>([]);
 
   ngOnInit(): void
   {
@@ -40,7 +40,7 @@ export class Builder implements OnInit
   {
     this.wordTypeService.getAllWordsType().subscribe({
       next: (res: any) => {
-        this.wordTypes = res;
+        this.wordTypes.set(res);
       },
       error: (err) => console.log(err)
     });
@@ -48,49 +48,49 @@ export class Builder implements OnInit
 
   loadWordsByWordTypeId(): void
   {
-    if (!this.selectedWordType)
-    {
-      this.availableWords = [];
+
+    if (!this.selectedWordType()) {
+      this.availableWords.set([]);
       return;
     }
 
-    const wordSelected = Number(this.selectedWordType);
+    const wordSelected = Number(this.selectedWordType());
     this.wordTypeService.getAllWordByIdType(wordSelected).subscribe({
-      next: (res: any) =>
-      {
-        this.availableWords = res;
+      next: (res: any) => {
+        this.availableWords.set(res);
       },
       error: (err) => console.log(err)
     });
   }
 
-  addWord(word: any): void
+  addWord(word: Word): void
   {
-    this.currentSentence.push(word);
+    this.currentSentence.update(sentence => [...sentence,word]);
+
   }
 
   clearSentence(): void
   {
-    this.currentSentence = [];
+    this.currentSentence.set([]);
   }
 
   resetSentence(): void
   {
-    this.currentSentence = [];
+    this.currentSentence.set([]);
   }
 
   saveSentence(): void {
 
     const sentence = {
       userId: 1,
-      wordIds: this.currentSentence.map(word => word.id)
+      wordIds: this.currentSentence().map(word => word.id)
     };
 
     this.sentenceService.saveCreatedSentence(sentence).subscribe({
       next: (res) => {
         console.log(res);
         alert('Sentence saved successfully!');
-        this.currentSentence = [];
+        this.currentSentence.set([]);
       },
       error: (err) => {
         console.log(err);

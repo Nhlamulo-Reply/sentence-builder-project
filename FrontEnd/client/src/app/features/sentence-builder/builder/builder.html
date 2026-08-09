@@ -12,28 +12,25 @@
       <label class="fw-semibold mb-2" style="color:#2d4a77;">
         Select Word Type
       </label>
+    <select class="form-select"
+            [ngModel]="selectedWordType()"
+            (ngModelChange)="selectedWordType.set($event); loadWordsByWordTypeId()">
 
-      <select class="form-select"
-        [(ngModel)]="selectedWordType"
-        (change)="loadWordsByWordTypeId()">
-
-        <option value="">Select Word Type</option>
-
-        @for (wordType of wordTypes; track wordType.id) {
-          <option [value]="wordType.id">
-            {{ wordType.name }}
-          </option>
-        }
-
-      </select>
+      <option value="">Select Word Type</option>
+      @for (wordType of wordTypes(); track wordType.id) {
+        <option [value]="wordType.id">
+          {{ wordType.name }}
+        </option>
+      }
+    </select>
+  </div>
     </div>
 
     <div class="mb-3">
-      <span class="fw-semibold" style="color:#2d4a77;"> Available Words </span>
+      <span class="fw-semibold mb-2" style="color:#2d4a77;"> Available Words </span>
       <div class="word-grid mt-3 d-flex flex-wrap gap-2">
-        @for (word of availableWords; track word.id)
-        {
-          <span class="word-pill"(click)="addWord(word)">
+        @for (word of availableWords(); track word.id) {
+          <span class="word-pill" (click)="addWord(word)">
             {{ word.text }}
           </span>
         }
@@ -47,8 +44,7 @@
     </div>
 
     <!-- Current Sentence -->
-    <div
-      class="bg-light p-3 rounded-4" style="background:#f8faff !important;border:1px solid #e9eff6;">
+    <div class="bg-light p-3 rounded-4" style="background:#f8faff !important;border:1px solid #e9eff6;">
 
       <div class="d-flex justify-content-between align-items-center">
         <span class="fw-semibold" style="color:#2d4a77;">
@@ -64,12 +60,12 @@
       </div>
 
       <div class="d-flex flex-wrap gap-2 mt-3">
-        @for (word of currentSentence; track word.id)
+        @for (word of currentSentence(); track word.id)
         {
           <span class="sentence-token">{{ word.text }}</span>
         }
 
-        @if (currentSentence.length === 0)
+        @if (currentSentence().length === 0)
         {
           <span class="text-muted">
             Start building your sentence...
@@ -89,9 +85,7 @@
           class="btn btn-outline-secondary"
           style="border-radius:40px;"
           (click)="resetSentence()">
-
           Reset
-
         </button>
 
       </div>
@@ -99,4 +93,4 @@
     </div>
 
   </div>
-</div>
+
