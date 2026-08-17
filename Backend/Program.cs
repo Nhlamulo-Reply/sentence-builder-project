@@ -65,17 +65,27 @@ var app = builder.Build();
 app.UseCors("AllowFrontend");
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+//if (app.Environment.IsDevelopment())
+//{
+//    app.UseSwagger();
+//    app.UseSwaggerUI( options =>
+//    {
+//        options.DocumentTitle = "Sentence Builder API";
+//        options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+//        options.RoutePrefix = string.Empty;
+//    });
+//    // app.MapOpenApi();
+//}
+
+app.UseSwagger();
+
+app.UseSwaggerUI(options =>
 {
-    app.UseSwagger();
-    app.UseSwaggerUI( options =>
-    {
-        options.DocumentTitle = "Sentence Builder API";
-        options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
-        options.RoutePrefix = string.Empty;
-    });
-    // app.MapOpenApi();
-}
+    options.DocumentTitle = "Sentence Builder API";
+    options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+    options.RoutePrefix = string.Empty;
+});
+
 
 app.UseHttpsRedirection();
 
