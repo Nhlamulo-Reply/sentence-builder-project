@@ -1,6 +1,6 @@
 import {inject, Injectable} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {environment} from '../../../environments/environment.development';
+import { environment } from '../../../environments/environment';
 import {Word, WordType} from '../Models/Word';
 
 
@@ -14,11 +14,11 @@ export class WordTypeService {
 
   getAllWordsType()
   {
-    return  this.http.get<WordType[]>(`${this.baseApiUrl}WordType`);
+    return  this.http.get<WordType[]>(`${this.baseApiUrl}word-types`);
   }
   getAllWordByIdType(wordTypeId: number)
   {
-    return this.http.get<Word[]>(`${this.baseApiUrl}Word/wordtype/${wordTypeId}`);
+    return this.http.get<Word[]>(`${this.baseApiUrl}word-types/${wordTypeId}/words`);
   }
 
 

@@ -4,6 +4,7 @@ using Backend.Interfaces.word;
 
 namespace Backend.Controllers
 { 
+    [Route("api/words")]
     public class WordController : BaseController
     {
 
@@ -14,7 +15,7 @@ namespace Backend.Controllers
         _wordService = wordService;
      }
 
-     [HttpGet("wordtype/{wordTypeId}")]
+     [HttpGet("/api/word-types/{wordTypeId:int}/words")]
      public async Task<IActionResult> GetWordsByWordTypeId(int wordTypeId)
         {
             var words = await _wordService.GetWordsByWordTypeId(wordTypeId);

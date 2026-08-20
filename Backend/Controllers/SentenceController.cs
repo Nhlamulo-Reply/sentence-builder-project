@@ -5,7 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.Controllers
 {
-  
+
+    [Route("api/sentences")]
     public class SentenceController : BaseController
     {
         private readonly ISentenceService _sentenceService;
@@ -15,7 +16,8 @@ namespace Backend.Controllers
         }
 
 
-        [HttpGet("get_all_sentences")]
+
+        [HttpGet()]
         public async Task<IActionResult> GetAllSentences()
         {
             var sentences = await _sentenceService.GetAllSentences();
@@ -23,8 +25,7 @@ namespace Backend.Controllers
             return Ok(sentences);
         }
 
-
-        [HttpPost("save_sentence")]
+        [HttpPost]
         public async Task<IActionResult> SaveSentence([FromBody] SaveSentenceDto dto)
         {
             var result = await _sentenceService.SaveSentence(dto);
@@ -38,8 +39,7 @@ namespace Backend.Controllers
             });
         }
 
-
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         public async Task<IActionResult> GetSentenceById(int id)
         {
             var sentence = await _sentenceService.GetSentenceById(id);
@@ -62,8 +62,7 @@ namespace Backend.Controllers
             });
         }
 
-
-        [HttpPut("{id}")]
+        [HttpPut("{id:int}")]
         public async Task<IActionResult> UpdateSentence(int id,[FromBody] SaveSentenceDto dto)
         {
             var sentence = await _sentenceService.UpdateSentence(id, dto);

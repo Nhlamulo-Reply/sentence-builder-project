@@ -16,6 +16,9 @@
 *.user
 *.suo
 
+# Local HTTPS certificate for Docker development
+https/
+
 
 # Angular
 
