@@ -24,8 +24,9 @@ services:
       dockerfile: Dockerfile
     container_name: sentence-builder-backend
     ports:
-      - "8080:8080"
+      - "5010:8080"
     environment:
+      ASPNETCORE_URLS: "http://+:8080"
       ConnectionStrings__DefaultConnection: "Server=sqlserver,1433;Database=WordBuilderDB;User Id=sa;Password=SentenceBuilder123!;TrustServerCertificate=True;"
     depends_on:
       - sqlserver
