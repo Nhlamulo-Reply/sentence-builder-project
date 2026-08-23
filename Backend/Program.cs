@@ -44,6 +44,7 @@ builder.Services.AddSwaggerGen(options =>
             Url = new Uri("https://github.com/Nhlamulo-Reply/sentence-builder-project.git")
         }
     });
+
 });
 
 
@@ -64,20 +65,23 @@ var app = builder.Build();
 
 app.UseCors("AllowFrontend");
 
-// Configure the HTTP request pipeline.
+app.UseSwagger();
+
+app.UseSwaggerUI(options =>
+{
+    options.DocumentTitle = "Sentence Builder API Documentation";
+    options.SwaggerEndpoint("/swagger/v1/swagger.json", "Sentence Builder API v1");
+
+    options.RoutePrefix = "swagger";
+
+    options.DisplayRequestDuration();
+    options.DocExpansion(Swashbuckle.AspNetCore.SwaggerUI.DocExpansion.List);
+});
+
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI( options =>
-    {
-        options.DocumentTitle = "Sentence Builder API";
-        options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
-        options.RoutePrefix = string.Empty;
-    });
-    // app.MapOpenApi();
+//    app.UseHttpsRedirection();
 }
-
-app.UseHttpsRedirection();
 
 app.UseAuthorization();
 

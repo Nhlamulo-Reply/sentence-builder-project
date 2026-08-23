@@ -1,20 +1,13 @@
-import {AfterViewInit, Component, inject, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit,Component,inject,OnInit,ViewChild} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
-import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
+import {MatPaginatorModule, MatPaginator} from '@angular/material/paginator';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableDataSource } from '@angular/material/table';
 import { SentenceService } from '../../../core/services/sentence-service';
-import { MatDialog } from '@angular/material/dialog';
-import { EditSentence } from '../edit-sentence/edit-sentence';
+import { EditSentenceModal } from '../edit-sentence/edit-sentence';
+import {Sentence} from '../../../core/Models/Sentence';
 
-interface Sentence
-{
-  id: number;
-  text: string;
-  createdAt: string;
-  userId: number;
-}
 
 @Component({
   selector: 'app-history',
@@ -25,19 +18,16 @@ interface Sentence
     CommonModule,
     MatTableModule,
     MatPaginatorModule,
-    MatButtonModule
+    MatButtonModule,
+    EditSentenceModal
   ]
 })
-
-export class History implements OnInit, AfterViewInit
-{
+export class History implements OnInit, AfterViewInit {
 
   private sentenceService = inject(SentenceService);
-  private dialog = inject(MatDialog);
-
-  displayedColumns = ['id', 'text', 'createdAt', 'actions'];
-
+  displayedColumns = ['id','text','createdAt','actions'];
   dataSource = new MatTableDataSource<Sentence>();
+  selectedSentenceId: number | null = null;
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
@@ -46,42 +36,37 @@ export class History implements OnInit, AfterViewInit
   {
     this.loadSentences();
   }
-
   ngAfterViewInit(): void
   {
     this.dataSource.paginator = this.paginator;
   }
-
   loadSentences(): void
   {
+
     this.sentenceService.getAllSentences().subscribe({
-      next: res => {
+      next: (res: Sentence[]) => {
         this.dataSource.data = res;
       },
-      error: err => console.log(err)
-    });
-  }
-
-  edit(sentence: Sentence): void
-  {
-    const dialogRef = this.dialog.open(EditSentence, {
-      width: '900px',
-      data: sentence.id
-
-    });
-    dialogRef.afterClosed().subscribe(result =>
-    {
-      if(result)
-      {
-        this.loadSentences();
+      error: err => {
+        console.log(err);
       }
 
     });
 
   }
-
-  delete(sentence: Sentence): void
+  editModal(sentence: Sentence): void
   {
-    console.log(sentence);
+    this.selectedSentenceId = sentence.id;
   }
+  closeModal(): void
+  {
+    this.selectedSentenceId = null;
+  }
+
+  sentenceUpdated(): void
+  {
+    this.closeModal();
+    this.loadSentences();
+  }
+
 }

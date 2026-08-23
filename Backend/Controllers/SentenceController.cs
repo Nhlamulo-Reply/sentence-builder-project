@@ -5,7 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.Controllers
 {
-  
+
+    [Route("api/sentences")]
     public class SentenceController : BaseController
     {
         private readonly ISentenceService _sentenceService;
@@ -15,7 +16,8 @@ namespace Backend.Controllers
         }
 
 
-        [HttpGet("get_all_sentences")]
+
+        [HttpGet()]
         public async Task<IActionResult> GetAllSentences()
         {
             var sentences = await _sentenceService.GetAllSentences();
@@ -23,17 +25,21 @@ namespace Backend.Controllers
             return Ok(sentences);
         }
 
-
-        [HttpPost("save_sentence")]
+        [HttpPost]
         public async Task<IActionResult> SaveSentence([FromBody] SaveSentenceDto dto)
         {
             var result = await _sentenceService.SaveSentence(dto);
-            return Ok(result);
+
+            return Ok(new
+            {
+                result.Id,
+                result.Text,
+                result.CreatedAt,
+                result.UserId
+            });
         }
 
-
-
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         public async Task<IActionResult> GetSentenceById(int id)
         {
             var sentence = await _sentenceService.GetSentenceById(id);
@@ -49,15 +55,15 @@ namespace Backend.Controllers
                 sentence.UserId,
                 Words = sentence.SentenceWords.Select(x => new
                 {
-                    x.Word.Id,
+                    x.Word!.Id,
                     x.Word.Text,
                     x.Word.WordTypeId
                 })
             });
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateSentence(int id, SaveSentenceDto dto)
+        [HttpPut("{id:int}")]
+        public async Task<IActionResult> UpdateSentence(int id,[FromBody] SaveSentenceDto dto)
         {
             var sentence = await _sentenceService.UpdateSentence(id, dto);
 
@@ -66,7 +72,12 @@ namespace Backend.Controllers
                 return NotFound();
             }
 
-            return Ok(sentence);
+            return Ok(new
+            {
+                sentence.Id,
+                sentence.Text,
+                sentence.UpdatedAt
+            });
         }
 
 

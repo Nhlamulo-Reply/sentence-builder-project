@@ -1,46 +1,34 @@
-import { Component, inject, OnInit, Inject } from '@angular/core';
+import {Component,EventEmitter,Input,OnInit,Output,inject, SimpleChanges, ChangeDetectorRef} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { MatDialogModule, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { WordTypeService } from '../../../core/services/word-type-service';
 import { SentenceService } from '../../../core/services/sentence-service';
+import {Word, WordType} from '../../../core/Models/Word';
+import {SentenceResponse} from '../../../core/Models/Sentence';
 
-interface WordType {
-  id: number;
-  name: string;
-}
-
-interface Word {
-  id: number;
-  text: string;
-  wordTypeId: number;
-}
-
-interface SentenceResponse {
-  id: number;
-  userId: number;
-  words: Word[];
-}
 
 @Component({
-  selector: 'app-edit-sentence',
+  selector: 'app-edit-sentence-modal',
   standalone: true,
   imports: [
     CommonModule,
-    FormsModule,
-    MatDialogModule
+    FormsModule
   ],
   templateUrl: './edit-sentence.html',
   styleUrl: './edit-sentence.css'
 })
-export class EditSentence implements OnInit {
+export class EditSentenceModal implements OnInit {
+
   private wordTypeService = inject(WordTypeService);
   private sentenceService = inject(SentenceService);
+  private cdr = inject(ChangeDetectorRef);
 
-  constructor(
-    private dialogRef: MatDialogRef<EditSentence>,
-    @Inject(MAT_DIALOG_DATA) public sentenceId: number
-  ) {}
+
+  @Input()
+  sentenceId!: number;
+
+  @Output()
+  saved = new EventEmitter<void>();
 
   selectedWordType = '';
   wordTypes: WordType[] = [];
@@ -50,20 +38,34 @@ export class EditSentence implements OnInit {
   errorMessage = '';
   userId = 1;
 
-  ngOnInit(): void {
+  ngOnInit(): void
+  {
     this.loadWordTypes();
-    this.loadSentence();
+  }
+  ngOnChanges(changes: SimpleChanges): void
+  {
+    if (changes['sentenceId'] && this.sentenceId)
+    {
+      this.currentSentence = [];
+      this.selectedWordType = '';
+      this.availableWords = [];
+      this.errorMessage = '';
+      this.loadSentence();
+    }
   }
 
-  loadWordTypes(): void {
+  loadWordTypes(): void
+  {
     this.wordTypeService.getAllWordsType().subscribe({
-      next: (res: any) => {
+      next: (res: WordType[]) => {
         this.wordTypes = res;
+        this.cdr.detectChanges();
       },
-      error: err => console.log(err)
+      error: err => {
+        console.log(err);
+      }
     });
   }
-
   loadWordsByWordTypeId(): void
   {
     if (!this.selectedWordType)
@@ -75,109 +77,114 @@ export class EditSentence implements OnInit {
     this.isLoading = true;
     const wordTypeId = Number(this.selectedWordType);
 
-    this.wordTypeService.getAllWordByIdType(wordTypeId).subscribe(
-      {
-      next: (res: any) => {
-        this.availableWords = res;
-        this.isLoading = false;
-      },
-      error: err => {
-        console.log(err);
-        this.isLoading = false;
-      }
-    });
+    this.wordTypeService.getAllWordByIdType(wordTypeId).subscribe({
+        next: (res: Word[]) => {
+          this.availableWords = res;
+          this.isLoading = false;
+          this.cdr.detectChanges();
+        },
+        error: err => {
+          console.log(err);
+          this.isLoading = false;
+          this.cdr.detectChanges();
+        }
+      });
   }
 
   loadSentence(): void
   {
+    if (!this.sentenceId) return;
+
     this.isLoading = true;
-    this.sentenceService.getSentenceById(this.sentenceId).subscribe({
-      next: (res: any) =>
-      {
-        this.currentSentence = res.words || [];
-        this.userId = res.userId || 1;
-        this.isLoading = false;
-      },
-      error: err =>
-      {
-        console.log(err);
-        this.isLoading = false;
-        this.errorMessage = 'Failed to load sentence';
-      }
-    });
+
+    this.sentenceService
+      .getSentenceById(this.sentenceId)
+      .subscribe({
+        next: (res: SentenceResponse) => {
+          this.currentSentence = res.words;
+          this.userId = res.userId;
+          this.isLoading = false;
+          this.cdr.detectChanges();
+        },
+        error: err => {
+          console.log(err);
+          this.isLoading = false;
+          this.errorMessage = 'Failed to load sentence';
+          this.cdr.detectChanges();
+        }
+      });
   }
 
   addWord(word: Word): void
   {
-    if (this.currentSentence.some(w => w.id === word.id))
+    const exists = this.currentSentence.some(w => w.id === word.id);
+    if (exists)
     {
-      this.errorMessage = 'Word already in sentence';
-      setTimeout(() => this.errorMessage = '', 2000);
+      this.errorMessage ='Word already in sentence';
       return;
     }
     this.currentSentence.push(word);
     this.errorMessage = '';
-  }
 
+  }
   removeWord(word: Word): void
   {
     this.currentSentence = this.currentSentence.filter(w => w.id !== word.id);
   }
-
   clearSentence(): void
   {
-    if (this.currentSentence.length === 0) return;
-    if (confirm('Clear all words from sentence?')) {
+
+    if (this.currentSentence.length === 0)
+    {
+      return;
+    }
+    if (confirm('Clear all words from sentence?'))
+    {
       this.currentSentence = [];
     }
+
   }
 
   updateSentence(): void
   {
-    if (this.currentSentence.length === 0) {
+
+    if (this.currentSentence.length === 0)
+    {
       this.errorMessage = 'Sentence must have at least one word';
       return;
     }
-
     this.isLoading = true;
     const dto =
       {
       userId: this.userId,
       wordIds: this.currentSentence.map(word => word.id)
-    }
+    };
 
     this.sentenceService.updateSentence(this.sentenceId, dto).subscribe({
-      next: (res: any) => {
-        console.log('Update response:', res);
-        alert('Sentence updated successfully!');
-        this.dialogRef.close(true);
-      },
-      error: err =>
-      {
-        console.log(err);
-        this.isLoading = false;
-        this.errorMessage = err.error?.message || 'Failed to update sentence';
-      }
-    });
-  }
+        next: () => {
+          alert('Sentence updated successfully!');
+          this.saved.emit();
+        },
 
-  cancel(): void
-  {
-    this.dialogRef.close(false);
+        error: err =>
+        {
+          console.log(err);
+          this.isLoading = false;
+          this.errorMessage ='Failed to update sentence';
+        }
+      });
   }
-
   getWordCount(): number
   {
     return this.currentSentence.length;
   }
-
   getSentenceText(): string
   {
-    return this.currentSentence.map(w => w.text).join(' ');
+    return this.currentSentence.map(word => word.text).join(' ');
   }
-
   isWordInSentence(word: Word): boolean
   {
     return this.currentSentence.some(w => w.id === word.id);
   }
+
 }

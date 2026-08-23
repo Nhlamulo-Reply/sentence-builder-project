@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.Controllers;
 
+[Route("api/auth")]
 public class AccountController : BaseController
 {
     private readonly IAccountService _accountService;

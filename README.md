@@ -35,6 +35,8 @@ Before running the project make sure the following software is installed:
 
 > A global Angular CLI installation is not required. The frontend uses the locally installed `@angular/cli` dependency in `FrontEnd/client`.
 
+For the optional Docker setup, see [DOCKER.md](DOCKER.md).
+
 ---
 
 ## Clone the Repository
@@ -126,11 +128,25 @@ cd Backend
 dotnet watch run
 ```
 
-To open Swagger go to :
+To open Swagger go to:
 
 ```
 https://localhost:5010/index.html
 ```
+
+---
+
+## API routes
+
+| Method | Route | Description |
+| --- | --- | --- |
+| `POST` | `/api/auth/login` | Authenticates a user. |
+| `GET` | `/api/word-types` | Returns all available word types. |
+| `GET` | `/api/word-types/{wordTypeId}/words` | Returns words for a word type. |
+| `GET` | `/api/sentences` | Returns sentence history. |
+| `POST` | `/api/sentences` | Creates a sentence from selected words. |
+| `GET` | `/api/sentences/{id}` | Returns one sentence and its words. |
+| `PUT` | `/api/sentences/{id}` | Updates a sentence's selected words. |
 
 ---
 
@@ -174,4 +190,3 @@ Password123!
 ```
 
 ---
-

@@ -4,7 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.Controllers
 {
-    public class WordTypeController(IWordTypeService wordTypeService) : BaseController
+    [Route("api/word-types")]
+
+    public class WordTypeController(IWordTypeService wordTypeService) :BaseController
     {
        
         private readonly IWordTypeService _wordTypeService = wordTypeService;

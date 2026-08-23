@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../environments/environment.development';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +13,7 @@ export class AccountService
 
   login(credentials: any)
   {
-    return this.http.post(`${this.baseApiUrl}account/login`, credentials);
+    return this.http.post(`${this.baseApiUrl}auth/login`, credentials);
   }
 
 
